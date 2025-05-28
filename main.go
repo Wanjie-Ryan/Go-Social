@@ -39,51 +39,84 @@
 // 	}
 // }
 
+//  ********* REFACTOR 2 *********
 
-// REFACTOR
+// package main
 
+// import "net/http"
+
+// type api struct{
+// 	addr string
+// }
+
+// func (s *api) ServeHTTP(w http.ResponseWriter, r *http.Request){
+// 	switch r.Method{
+// 	case http.MethodGet:
+// 		switch r.URL.Path{
+// 		case "/":
+// 			w.Write([]byte("Get Method"))
+// 		case "/index":
+// 			w.Write([]byte("Index"))
+// 		}
+// 	case http.MethodPost:
+// 		w.Write([]byte("Post Method"))
+// 	}
+// }
+
+// // additional handler methods
+// func (a *api) createUsersHandler(w http.ResponseWriter, r *http.Request){
+// 	w.Write([]byte("Create User"))
+// }
+
+// func (a *api) getUsershandler(w http.ResponseWriter, r *http.Request){
+// 	w.Write([]byte("Get User..."))
+// }
+
+// func main(){
+// 	api := &api{addr:":8081"} // creating instance of api
+// 	// a mux is a router (request mutiplexer)
+// 	mux :=http.NewServeMux()
+// 	// creating a server struct with configs
+// 	srv := &http.Server{
+// 		Addr: api.addr,
+// 		Handler: mux,
+// 	}
+
+// 	mux.HandleFunc("GET /users", api.getUsershandler)
+// 	//mux needs a string and a handlerFunc as its arguments
+// 	mux.HandleFunc("POST /users", api.createUsersHandler)
+
+// 	srv.ListenAndServe()
+// }
+
+// ******** MORE FINE REFACTOR ************
 package main
 
-import "net/http"
+import ("net/http"
+		"log"
 
-type api struct{
-	addr string
-}
+)
 
-func (s *api) ServeHTTP(w http.ResponseWriter, r *http.Request){
-	switch r.Method{
-	case http.MethodGet:
-		switch r.URL.Path{
-		case "/":
-			w.Write([]byte("Get Method"))
-		}
-	case "/index":
-		w.Write([]byte("Index"))
-	case http.MethodPost:
-		w.Write([]byte("Post Method"))
-	}
-}
-
-func (a *api) createUsersHandler(w http.ResponseWriter, r *http.Request){
-	w.Write([]byte("Create User"))
-}
-
-func (a *api) getUsershandler(w http.ResponseWriter, r *http.Request){
-	w.Write([]byte("Get User..."))
-}
+// type api struct{
+// 	addr string
+// }
 
 func main(){
-	api := &api{addr:"8081"}
-	// a mux is a router
-	mux :=http.NewServeMux()
+
+	api := &api{addr: ":8081"}
+	mux := http.NewServeMux()
 	srv := &http.Server{
-		Addr: api.addr,
+		Addr:api.addr,
 		Handler: mux,
 	}
 
-	mux.HandleFunc("GET /users", api.getUsershandler)
-	//mux needs a string and a handlerFunc as its arguments
-	mux.HandleFunc("POST /users", api.createUsersHandler)
+	mux.HandleFunc("GET /users", api.getUsersHandler)
+	mux.HandleFunc("POST /users", api.createUserHandler)
 
-	srv.ListenAndServe()
+	err :=srv.ListenAndServe()
+	if err != nil{
+		log.Fatal(err)
+	}
+
+
 }
