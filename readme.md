@@ -1,4 +1,4 @@
-Interfaces in Go are types that specify a set of method signatrues that have no implementation
+Interfaces in Go are types that specify a set of method signatrues that have no implementation.
 it defines what methods a type must have, but not how they are implemented.
 Any type that implements those emthods implicitly satisfies the interface, no explicit declaration needed
 eg.
