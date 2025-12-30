@@ -7,7 +7,7 @@ type Speaker interface{
 Speak() string
 }
 Advantages of interfaces
--- polymorphism --> writing functions that can accept any type that satisfies interface
+--- polymorphism --> writing functions that can accept any type that satisfies interface
 -- Flexibility and decoupling...
 -- code is more testable and easier to extend.
 
