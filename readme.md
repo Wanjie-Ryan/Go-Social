@@ -9,7 +9,7 @@ Speak() string
 Advantages of interfaces
 --- polymorphism --> writing functions that can accept any type that satisfies interface
 --- Flexibility and decoupling...
--- code is more testable and easier to extend.
+--- code is more testable and easier to extend.
 
 In Go, no explicit declaration of 'implementing' an interface is needed. its implicit if a type has all required methods.
 
