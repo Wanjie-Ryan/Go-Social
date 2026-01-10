@@ -2,7 +2,7 @@ Interfaces in Go are types that specify a set of method signatrues that have no 
 it defines what methods a type must have, but not how they are implemented....
 Any type that implements those emthods implicitly satisfies the interface, no explicit declaration needed
 eg..
-// any type with a speak() string method satisifies the Speaker interface.
+/// any type with a speak() string method satisifies the Speaker interface.
 type Speaker interface{
 Speak() string
 }
